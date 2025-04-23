@@ -35,7 +35,7 @@ const traffic = [
     new Car(road.getLaneCenter(2), -1000, 30, 50, "DUMMY", 2),
     new Car(road.getLaneCenter(0), -1100, 30, 50, "DUMMY", 2),
     new Car(road.getLaneCenter(1), -1200, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -1250, 30, 50, "DUMMY", 2),
+    new Car(road.getLaneCenter(0), -1350, 30, 50, "DUMMY", 2),
     new Car(road.getLaneCenter(2), -1250, 30, 50, "DUMMY", 2),
 ];
 
