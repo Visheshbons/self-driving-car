@@ -18,7 +18,7 @@ if (localStorage.getItem("bestBrain")) {
         );
         if (i != 0) {
             NeuralNetwork.mutate(cars[i].brain, 0.15);
-        };
+        }
     };
 };
 
@@ -49,6 +49,18 @@ function save() {
 
 function discard() {
     localStorage.removeItem("bestBrain");
+};
+
+function redirect(url) {
+    window.location.href = url;
+}
+
+function tryOut(type) {
+    if (type == "main") {
+        redirect('sonar/index.html');
+    } else {
+        redirect('try/index.html');
+    }
 };
 
 function generateCars(N) {
