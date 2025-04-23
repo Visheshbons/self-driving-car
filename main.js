@@ -1,5 +1,5 @@
 const CarCanvas = document.getElementById('carCanvas');
-CarCanvas.width = 200;
+CarCanvas.width = 250;
 const networkCanvas = document.getElementById('networkCanvas');
 networkCanvas.width = 300;
 
@@ -23,23 +23,52 @@ if (localStorage.getItem("bestBrain")) {
 };
 
 const traffic = [
-    new Car(road.getLaneCenter(1), -100, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -300, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(2), -300, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -500, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(1), -500, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(1), -700, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(2), -700, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(1), -800, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -900, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(2), -1000, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -1100, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(1), -1200, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(0), -1350, 30, 50, "DUMMY", 2),
-    new Car(road.getLaneCenter(2), -1250, 30, 50, "DUMMY", 2),
+    // Lead vehicle
+    newCar(1, -100),
+
+    // Cluster 1
+    newCar(0, -200),
+    newTruck(1, -280),
+    newCar(2, -500),
+    newCar(3, -580),
+
+    // Cluster 2
+    newCar(1, -700),
+    newTruck(2, -780),
+    newCar(3, -1000),
+
+    // Cluster 3
+    newTruck(0, -1200),
+    newCar(1, -1400),
+    newCar(2, -1480),
+    newTruck(3, -1560),
+
+    // Final stretch
+    newCar(0, -1800),
+    newTruck(1, -1880),
+    newCar(2, -2100),
+    newCar(3, -2180)
 ];
 
+
+
 animate();
+
+function newCar( lane, y ) {
+    return new Car ( road.getLaneCenter(lane), y, 30, 50, "DUMMY", 2);
+};
+
+function newTruck ( lane, y ) {
+    return new Car ( road.getLaneCenter(lane), y, 40, 150, "DUMMY", 1.5)
+};
+
+function randInt( startNum = 0, endNum ) {
+    endNum++;
+    const zeroOne = Math.random();
+    let numRaw = zeroOne * (endNum - startNum);
+    const num = Math.floor(numRaw);
+    return num;
+};
 
 function save() {
     localStorage.setItem("bestBrain",
