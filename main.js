@@ -8,7 +8,7 @@ const networkCtx = networkCanvas.getContext('2d');
 
 const road = new Road ( CarCanvas.width / 2, CarCanvas.width * 0.9 );
 
-const N = 750;
+const N = 1;
 const cars = generateCars(N);
 let bestCar = cars[0];
 if (localStorage.getItem("bestBrain")) {
@@ -20,6 +20,32 @@ if (localStorage.getItem("bestBrain")) {
             NeuralNetwork.mutate(cars[i].brain, 0.15);
         }
     };
+};
+
+let trafficSpawnY = -2200; // Start just after your last manual vehicle
+
+function generateInfiniteTraffic() {
+    const spacing = 400; // Distance between clusters
+    const numVehicles = Math.random() < 0.6 ? 1 : 2; // 60% 1 car, 40% 2
+
+    // Select unique lanes (no overlap)
+    const availableLanes = [0, 1, 2, 3];
+    shuffle(availableLanes);
+    const selectedLanes = availableLanes.slice(0, numVehicles);
+
+    let truckPlaced = false;
+
+    selectedLanes.forEach(lane => {
+        const placeTruck = !truckPlaced && Math.random() < 0.3; // Max 1 truck, 30% chance
+        if (placeTruck) {
+            traffic.push(newTruck(lane, trafficSpawnY));
+            truckPlaced = true;
+        } else {
+            traffic.push(newCar(lane, trafficSpawnY));
+        }
+    });
+
+    trafficSpawnY -= spacing;
 };
 
 const traffic = [
@@ -94,7 +120,7 @@ function tryOut(type) {
 
 function generateCars(N) {
     const cars = [];
-    for (let i = 1; i < N; i++) {
+    for (let i = 0; i < N; i++) {
         cars.push(new Car(
             road.getLaneCenter(1),
             100,
@@ -119,6 +145,15 @@ function animate(time) {
             ...cars.map(c => c.y),
         ),
     );
+
+    // Clean up old traffic far behind bestCar
+    while (traffic.length > 0 && traffic[0].y > bestCar.y + 1000) {
+        traffic.shift(); // remove oldest car
+    };
+
+    if (bestCar.y < trafficSpawnY + 1250) {
+        generateInfiniteTraffic();
+    };
 
     CarCanvas.height = window.innerHeight;
     networkCanvas.height = window.innerHeight;
