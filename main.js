@@ -14,6 +14,10 @@ const traffic = [
 
 animate();
 
+function generateCars(N) {
+    
+}
+
 function animate(time) {
     for (let i = 0; i < traffic.length; i++) {
         traffic[i].update(road.borders, []);
