@@ -8,7 +8,7 @@ const networkCtx = networkCanvas.getContext('2d');
 
 const road = new Road ( CarCanvas.width / 2, CarCanvas.width * 0.9 );
 
-const N = 750;
+const N = 1;
 const cars = generateCars(N);
 let bestCar = cars[0];
 if (localStorage.getItem("bestBrain")) {
@@ -112,9 +112,9 @@ function redirect(url) {
 
 function tryOut(type) {
     if (type == "main") {
-        redirect('sonar/index.html');
+        redirect('tryOut/index.html');
     } else {
-        redirect('try/index.html');
+        redirect('LIDAR/index.html');
     }
 };
 
