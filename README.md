@@ -55,4 +55,4 @@ Then reload.
 
 ***
 
-Version 2.1.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 2.1.1 | &copy; 2025 Vishesh Kudva. | All rights reserved.
