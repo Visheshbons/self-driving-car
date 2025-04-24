@@ -44,6 +44,14 @@ localStorage.bestBrain = /** the brain JSON in question */
 ```
 Then reload.
 
+## Credits
+
+- Developed by **Vishesh Kudva**
+- Based on concepts and tutorials by [Dr. Radu Mariescu-Istodor](https://github.com/gniziemazity/Self-driving-car)
+- Additional guidance and refinements by **ChatGPT (OpenAI)**
+- View source on [GitHub](https://github.com/Visheshbons/self-driving-car)
+- Live at: [v-autopilot-ai-trainer.onrender.com](https://v-autopilot-ai-trainer.onrender.com)
+
 ***
 
 Version 2.1.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
