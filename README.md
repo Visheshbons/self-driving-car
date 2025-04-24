@@ -46,11 +46,12 @@ Then reload.
 
 ## Credits
 
-- Developed by **Vishesh Kudva**
-- Based on concepts and tutorials by [Dr. Radu Mariescu-Istodor](https://github.com/gniziemazity/Self-driving-car)
-- Additional guidance and refinements by **ChatGPT (OpenAI)**
-- View source on [GitHub](https://github.com/Visheshbons/self-driving-car)
-- Live at: [v-autopilot-ai-trainer.onrender.com](https://v-autopilot-ai-trainer.onrender.com)
+- **Project Developer:** [Vishesh Kudva](https://github.com/Visheshbons)
+- **Original Concept & Tutorials:** [Dr. Radu Mariescu-Istodor](https://github.com/gniziemazity/Self-driving-car)
+- **AI & Code Assistance:** [ChatGPT by OpenAI](https://openai.com/chatgpt)
+- **Source Code:** [GitHub Repository](https://github.com/Visheshbons/self-driving-car)
+- **Live Demo:** [v-autopilot-ai-trainer.onrender.com](https://v-autopilot-ai-trainer.onrender.com)
+
 
 ***
 
