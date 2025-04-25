@@ -80,6 +80,13 @@ class Controls {
                 const control = target.dataset.control;
                 const state = isStarting;
 
+                // Optional: vibrate on press
+                if (state && 'vibrate' in navigator) {
+                    if (control === 'nitrous') {
+                        navigator.vibrate(100); // strong effect
+                    };
+                };
+
                 switch (control) {
                     case 'forward':
                         this.forward = state;
