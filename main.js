@@ -22,7 +22,7 @@ if (localStorage.getItem("bestBrain")) {
     };
 };
 
-let trafficSpawnY = -2200; // Start just after your last manual vehicle
+let trafficSpawnY = -2500; // Start just after your last manual vehicle
 
 function generateInfiniteTraffic() {
     const spacing = 400; // Distance between clusters
