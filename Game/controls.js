@@ -83,7 +83,7 @@ class Controls {
                 // Optional: vibrate on press
                 if (state && 'vibrate' in navigator) {
                     if (control === 'nitrous') {
-                        navigator.vibrate(100); // strong effect
+                        navigator.vibrate(1000); // strong effect
                     };
                 };
 
