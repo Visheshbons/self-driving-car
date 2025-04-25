@@ -34,10 +34,11 @@ Again, death causes you to be able to see where you crashed.
 
 ### 25 Lanes
 
-In the 25 Lanes mode, you drive with an overpowered car with ridiculously high steering sensitivity.
-Unlike the other game modes, this version lets you see the road in actual vision.
-It also has the greatest death screen of all time.
-Here, you can also break using your spacebar, which is 3 times more powerful than your acceleration.
+In the 25 Lanes mode, you drive with an overpowered car with ridiculously high steering sensitivity. /
+Unlike the other game modes, this version lets you see the road in actual vision. /
+It also has the greatest death screen of all time. /
+Here, you can also break using your spacebar, which is 3 times more powerful than your acceleration. /
+It also shows you your Y value as a score. /
 It is great! (`Car.maxSpeed = infinity`)
 
 ## Some good starter `bestBrain`s
