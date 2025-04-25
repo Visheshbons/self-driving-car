@@ -4,21 +4,23 @@ class Controls {
         this.left = false;
         this.right = false;
         this.reverse = false;
-        this.nitrous = false; // Add nitrous control
+        this.nitrous = false;
+        this.rocketBoost = false;
 
-        switch(type) {
+        switch (type) {
             case "KEYS":
-                this.#addKeyboardListeners();
+                this.addKeyboardListeners();
+                this.addTouchListeners();
                 break;
             case "DUMMY":
                 this.forward = true;
                 break;
-        };
-    };
+        }
+    }
 
-    #addKeyboardListeners() {
+    addKeyboardListeners() {
         document.onkeydown = (event) => {
-            switch(event.key.toLowerCase()) { // Convert key to lowercase for consistency
+            switch (event.key.toLowerCase()) {
                 case 'arrowleft':
                     this.left = true;
                     break;
@@ -29,22 +31,20 @@ class Controls {
                     this.forward = true;
                     break;
                 case 'arrowdown':
+                case ' ':
                     this.reverse = true;
                     break;
-                case ' ': // Spacebar is used as an alternative key for reverse
-                    this.reverse = true;
-                    break;
-                case 'n': // Handle both 'N' and 'n'
+                case 'n':
                     this.nitrous = true;
                     break;
                 case 'r':
                     this.rocketBoost = true;
                     break;
-            };
+            }
         };
 
         document.onkeyup = (event) => {
-            switch(event.key.toLowerCase()) { // Convert key to lowercase for consistency
+            switch (event.key.toLowerCase()) {
                 case 'arrowleft':
                     this.left = false;
                     break;
@@ -55,63 +55,61 @@ class Controls {
                     this.forward = false;
                     break;
                 case 'arrowdown':
+                case ' ':
                     this.reverse = false;
                     break;
-                case ' ': // Spacebar is used as an alternative key for reverse
-                    this.reverse = false;
-                    break;
-                case 'n': // Handle both 'N' and 'n'
+                case 'n':
                     this.nitrous = false;
                     break;
                 case 'r':
-                    this.rocketBoost = true;
+                    this.rocketBoost = false;
                     break;
-            };
+            }
         };
+    }
 
-        const touchZone = document.getElementById('touch-controls'); // Ensure a touch control element exists
+    addTouchListeners() {
+        const touchZone = document.getElementById('touch-controls');
         if (!touchZone) return;
 
+        const handleTouch = (event, isStarting) => {
+            for (let touch of event.changedTouches) {
+                const target = document.elementFromPoint(touch.clientX, touch.clientY);
+                if (!target || !target.dataset.control) continue;
+
+                const control = target.dataset.control;
+                const state = isStarting;
+
+                switch (control) {
+                    case 'forward':
+                        this.forward = state;
+                        break;
+                    case 'left':
+                        this.left = state;
+                        break;
+                    case 'right':
+                        this.right = state;
+                        break;
+                    case 'reverse':
+                        this.reverse = state;
+                        break;
+                    case 'nitrous':
+                        this.nitrous = state;
+                        break;
+                }
+            }
+        };
+
         touchZone.addEventListener('touchstart', (event) => {
-            const touch = event.target.dataset.control;
-            switch (touch) {
-                case 'forward':
-                    this.forward = true;
-                    break;
-                case 'left':
-                    this.left = true;
-                    break;
-                case 'right':
-                    this.right = true;
-                    break;
-                case 'reverse':
-                    this.reverse = true;
-                    break;
-                case 'nitrous':
-                    this.nitrous = true;
-                    break;
-            };
-        });
+            handleTouch(event, true);
+        }, { passive: false });
 
         touchZone.addEventListener('touchend', (event) => {
-            const touch = event.target.dataset.control;
-            switch (touch) {
-                case 'forward':
-                    this.forward = false;
-                    break;
-                case 'left':
-                    this.left = false;
-                    break;
-                case 'right':
-                    this.right = false;
-                    break;
-                case 'reverse':
-                    this.reverse = false;
-                    break;
-                case 'nitrous':
-                    this.nitrous = true;
-                    break;
-            };
-        });
-    };
-};
+            handleTouch(event, false);
+        }, { passive: false });
+
+        touchZone.addEventListener('touchcancel', (event) => {
+            handleTouch(event, false);
+        }, { passive: false });
+    }
+}
