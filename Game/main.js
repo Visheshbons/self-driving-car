@@ -6,6 +6,14 @@ const ctx = canvas.getContext('2d');
 const road = new Road(canvas.width / 2, canvas.width * 0.9);
 const car = new Car(road.getLaneCenter(12), 100, 30, 50, "KEYS");
 
+let score = 0; // Declare highScore globally
+let highScore = 0;
+let topSpeed = 0;
+
+if (localStorage.getItem('highScore')) {
+    highScore = parseFloat(localStorage.getItem('highScore')); // Retrieve and parse highScore
+};
+
 let trafficSpawnY = -500;
 const traffic = []; // Initialize an empty traffic array
 
@@ -22,11 +30,12 @@ function generateInfiniteTraffic() {
 
     selectedLanes.forEach(lane => {
         const placeTruck = !truckPlaced && Math.random() < 0.3; // Max 1 truck, 30% chance
+        const laneSpeed = 5 + lane * 0.5; // Speed increases with lane index
         if (placeTruck) {
-            traffic.push(newTruck(lane, trafficSpawnY));
+            traffic.push(newTruck(lane, trafficSpawnY, laneSpeed)); // Pass speed to newTruck
             truckPlaced = true;
         } else {
-            traffic.push(newCar(lane, trafficSpawnY));
+            traffic.push(newCar(lane, trafficSpawnY, laneSpeed)); // Pass speed to newCar
         }
     });
 
@@ -40,12 +49,12 @@ for (let i = 0; i < 25; i++) {
 
 animate();
 
-function newCar(lane, y) {
-    return new Car(road.getLaneCenter(lane), y, 30, 50, "DUMMY", 2);
+function newCar(lane, y, speed) {
+    return new Car(road.getLaneCenter(lane), y, 30, 50, "DUMMY", speed);
 }
 
-function newTruck(lane, y) {
-    return new Car(road.getLaneCenter(lane), y, 40, 150, "DUMMY", 1.5);
+function newTruck(lane, y, speed) {
+    return new Car(road.getLaneCenter(lane), y, 40, 150, "DUMMY", speed);
 }
 
 function animate() {
@@ -64,6 +73,10 @@ function animate() {
             generateInfiniteTraffic();
         }
 
+        if (car.speed > topSpeed) {
+            topSpeed = car.speed;
+        }
+
         canvas.height = window.innerHeight;
 
         ctx.save();
@@ -78,8 +91,18 @@ function animate() {
         car.draw(ctx, 'blue');
 
         ctx.restore();
+
+        // Draw speed text at the top (after restoring transformations)
+        ctx.textAlign = "center";
+        ctx.fillStyle = "black"; // Set text color to black
+        ctx.font = "30px Monospace";
+        ctx.fillText("Speed: " + Math.floor(car.speed * 10) + "kph", canvas.width / 2, 100); // Fixed position at the top
+
+        score = -car.y;
         requestAnimationFrame(animate);
     } else {
+        score = -car.y; // Update score with the new value
+
         // Display death screen
         ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -87,16 +110,26 @@ function animate() {
         ctx.textAlign = "center";
         ctx.fillStyle = "white";
         ctx.font = "15px Arial";
-        ctx.fillText("Your car went", canvas.width / 2, canvas.height / 2 - 70);
+        ctx.fillText("Your car went", canvas.width / 2, canvas.height / 2 - 110);
         ctx.fillStyle = "red";
         ctx.font = "30px Arial";
-        ctx.fillText("KAPUT", canvas.width / 2, canvas.height / 2 - 20);
+        ctx.fillText("KAPUT", canvas.width / 2, canvas.height / 2 - 60);
         ctx.fillStyle = "white";
         ctx.font = "15px Arial";
-        ctx.fillText("Reload the page to restart", canvas.width / 2, canvas.height / 2 + 20);
+        ctx.fillText("Reload the page to restart", canvas.width / 2, canvas.height / 2 - 20);
         ctx.fillStyle = "white";
         ctx.font = "15px Arial";
-        ctx.fillText("Score: " + -car.y + "", canvas.width / 2, canvas.height / 2 + 60);
+        ctx.fillText("Score: " + -car.y + "", canvas.width / 2, canvas.height / 2 + 20);
+        if (-car.y > highScore) {
+            score = -car.y; // Update highScore with the new value
+            localStorage.setItem('highScore', score); // Save to localStorage
+            ctx.fillStyle = "green";
+            ctx.fillText("New High Score: " + score, canvas.width / 2, canvas.height / 2 + 60);
+        } else {
+            ctx.fillText("High Score: " + highScore, canvas.width / 2, canvas.height / 2 + 60);
+        };
+        ctx.fillStyle = "white";
+        ctx.fillText("Top Speed: " + Math.floor(topSpeed * 1000) / 100 + "kph", canvas.width / 2, canvas.height / 2 + 100);
 
         // Add event listener for restart
         document.addEventListener("keydown", (event) => {
