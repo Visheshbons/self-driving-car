@@ -151,7 +151,7 @@ function animate(time) {
         traffic.shift(); // remove oldest car
     };
 
-    if (bestCar.y < trafficSpawnY + 2180) {
+    if (bestCar.y < trafficSpawnY + 1000) {
         generateInfiniteTraffic();
     };
 
