@@ -14,7 +14,7 @@ class Car {
 
         this.useBrain = controlType == 'AI';
 
-        if (controlType != "DUMMY") {
+        if (controlType != "TRAFFIC") {
             this.sensor = new Sensor(this);
             this.brain = new NeuralNetwork(
                 [this.sensor.rayCount, 6, 4]
@@ -122,7 +122,7 @@ class Car {
     draw(ctx, color, drawSensor = false) {
         if (!this.polygon || this.damaged) return;
     
-        ctx.fillStyle = this.damaged ? 'gray' : color;
+        ctx.fillStyle = this.damaged ? 'grey' : color;
         
         ctx.beginPath();
         ctx.moveTo(this.polygon[0].x, this.polygon[0].y);

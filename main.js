@@ -78,16 +78,14 @@ const traffic = [
     // Infinite traffic starts...
 ];
 
-
-
 animate();
 
 function newCar( lane, y ) {
-    return new Car ( road.getLaneCenter(lane), y, 30, 50, "DUMMY", 2);
+    return new Car ( road.getLaneCenter(lane), y, 30, 50, "TRAFFIC", 2);
 };
 
 function newTruck ( lane, y ) {
-    return new Car ( road.getLaneCenter(lane), y, 40, 150, "DUMMY", 1.5)
+    return new Car ( road.getLaneCenter(lane), y, 40, 150, "TRAFFIC", 1.5)
 };
 
 function randInt( startNum = 0, endNum ) {
