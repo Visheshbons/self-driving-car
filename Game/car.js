@@ -15,6 +15,7 @@ class Car {
         this.friction = 0.05;
         this.angle = 0;
         this.damaged = false;
+        this.rocketBoost = false; // Initialize rocketBoost
 
         this.controls = new Controls(controlType);
     };
@@ -24,10 +25,12 @@ class Car {
             this.#move();
             this.polygon = this.#createPolygon();
             this.damaged = this.#assessDamage(roadBorders, traffic);
-        };
+        } else {
+            this.controls.rocketBoost = false; // Reset rocketBoost when damaged
+        }
         if (this.sensor) {
             this.sensor.update(roadBorders, traffic);
-        };
+        }
     };
 
     #assessDamage(roadBorders, traffic) {
@@ -71,7 +74,13 @@ class Car {
 
     #move() {
         if (this.controls.forward) {
-            this.speed += this.acceleration;
+            if (this.controls.nitrous) {
+                this.speed += this.acceleration * 10;
+            } else if (this.controls.rocketBoost) { // Use controls to activate rocketBoost
+                this.speed += this.acceleration * 50;
+            } else {
+                this.speed += this.acceleration;
+            }
         };
         if (this.controls.reverse) {
             this.speed -= this.acceleration * 3;

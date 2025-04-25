@@ -4,6 +4,7 @@ class Controls {
         this.left = false;
         this.right = false;
         this.reverse = false;
+        this.nitrous = false; // Add nitrous control
 
         switch(type) {
             case "KEYS":
@@ -17,41 +18,53 @@ class Controls {
 
     #addKeyboardListeners() {
         document.onkeydown = (event) => {
-            switch(event.key) {
-                case 'ArrowLeft':
+            switch(event.key.toLowerCase()) { // Convert key to lowercase for consistency
+                case 'arrowleft':
                     this.left = true;
                     break;
-                case 'ArrowRight':
+                case 'arrowright':
                     this.right = true;
                     break;
-                case 'ArrowUp':
+                case 'arrowup':
                     this.forward = true;
                     break;
-                case 'ArrowDown':
+                case 'arrowdown':
                     this.reverse = true;
                     break;
                 case ' ': // Spacebar is used as an alternative key for reverse
                     this.reverse = true;
+                    break;
+                case 'n': // Handle both 'N' and 'n'
+                    this.nitrous = true;
+                    break;
+                case 'r':
+                    this.rocketBoost = true;
                     break;
             };
         };
 
         document.onkeyup = (event) => {
-            switch(event.key) {
-                case 'ArrowLeft':
+            switch(event.key.toLowerCase()) { // Convert key to lowercase for consistency
+                case 'arrowleft':
                     this.left = false;
                     break;
-                case 'ArrowRight':
+                case 'arrowright':
                     this.right = false;
                     break;
-                case 'ArrowUp':
+                case 'arrowup':
                     this.forward = false;
                     break;
-                case 'ArrowDown':
+                case 'arrowdown':
                     this.reverse = false;
                     break;
                 case ' ': // Spacebar is used as an alternative key for reverse
                     this.reverse = false;
+                    break;
+                case 'n': // Handle both 'N' and 'n'
+                    this.nitrous = false;
+                    break;
+                case 'r':
+                    this.rocketBoost = true;
                     break;
             };
         };
