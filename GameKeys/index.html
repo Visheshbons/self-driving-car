@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Self-driving car</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #touch-controls {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .control-button {
+            width: 100px;
+            height: 100px;
+            background-color: #ccc;
+            border: 1px solid #999;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 60px;
+            font-size: 18px;
+            font-weight: bold;
+            user-select: none;
+        }
+        .control-button:active {
+            background-color: #aaa;
+        }
+
+        .invisible {
+            opacity: 0;
+        } 
+        
+        .invisible:active {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas"></canvas>
+    <div id="touch-controls">
+        <div class="control-button" data-control="left">←</div>
+        <div class="control-button" data-control="right">→</div>
+        <div class="control-button invisible"></div>
+        <div class="control-button invisible"></div>
+        <div class="control-button" data-control="forward">↑</div>
+        <div class="control-button" data-control="reverse">↓</div>
+        <div class="control-button" data-control="nitrous">NO<sub>3</sub></div>
+    </div>
+    <script src="utils.js"></script>
+    <script src="road.js"></script>
+    <script src="controls.js"></script>
+    <script src="car.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
