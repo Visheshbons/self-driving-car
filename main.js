@@ -74,6 +74,8 @@ const traffic = [
     newTruck(1, -1880),
     newCar(2, -2100),
     newCar(3, -2180)
+    
+    // Infinite traffic starts...
 ];
 
 
