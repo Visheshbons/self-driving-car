@@ -42,6 +42,12 @@ Press N for nitrous, and R for the Rocket booster.
 It also shows you your Y value as a score, and also shows you the highest speed you travelled at. 
 It is great! (`Car.maxSpeed = infinity`)
 
+### 25 Lanes Touchscreen (Unstable)
+
+This is a feeble attempt to make the game accecable by mobile users. \
+Can only ba accessed via `"/Game/index.html"`. \
+Linked: [here](https://v-autopilot-ai-trainer.onrender.com/Game/index.html).
+
 ## Some good starter `bestBrain`s
 One is:  
 ```
@@ -71,4 +77,4 @@ Then reload.
 
 ---
 
-Version 2.2.2 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 2.2.3 | &copy; 2025 Vishesh Kudva. | All rights reserved.
