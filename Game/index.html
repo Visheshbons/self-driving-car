@@ -27,14 +27,24 @@
         .control-button:active {
             background-color: #aaa;
         }
+
+        .invisible {
+            opacity: 0;
+        } 
+        
+        .invisible:active {
+            opacity: 0;
+        }
     </style>
 </head>
 <body>
     <canvas id="myCanvas"></canvas>
     <div id="touch-controls">
         <div class="control-button" data-control="left">←</div>
-        <div class="control-button" data-control="forward">↑</div>
         <div class="control-button" data-control="right">→</div>
+        <div class="control-button invisible"></div>
+        <div class="control-button invisible"></div>
+        <div class="control-button" data-control="forward">↑</div>
         <div class="control-button" data-control="reverse">↓</div>
         <div class="control-button" data-control="nitrous">NO<sub>3</sub></div>
     </div>
