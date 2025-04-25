@@ -120,7 +120,7 @@ class Car {
     };
 
     draw(ctx, color, drawSensor = false) {
-        if (!this.polygon || this.damaged) return;
+        if (!this.polygon) return;
     
         ctx.fillStyle = this.damaged ? 'grey' : color;
         
