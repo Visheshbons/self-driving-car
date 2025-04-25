@@ -30,6 +30,9 @@ class Controls {
                 case 'ArrowDown':
                     this.reverse = true;
                     break;
+                case ' ': // Spacebar is used as an alternative key for reverse
+                    this.reverse = true;
+                    break;
             };
         };
 
@@ -45,6 +48,9 @@ class Controls {
                     this.forward = false;
                     break;
                 case 'ArrowDown':
+                    this.reverse = false;
+                    break;
+                case ' ': // Spacebar is used as an alternative key for reverse
                     this.reverse = false;
                     break;
             };

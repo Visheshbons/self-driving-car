@@ -1,19 +1,20 @@
 const canvas = document.getElementById('myCanvas');
 canvas.height = window.innerHeight;
-canvas.width = 250;
+canvas.width = 1500;
 
 const ctx = canvas.getContext('2d');
-const road = new Road ( canvas.width / 2, canvas.width * 0.9 );
-const car = new Car( road.getLaneCenter(1), 100, 30, 50, "KEYS" );
+const road = new Road(canvas.width / 2, canvas.width * 0.9);
+const car = new Car(road.getLaneCenter(12), 100, 30, 50, "KEYS");
 
-let trafficSpawnY = -2200; // Start just after your last manual vehicle
+let trafficSpawnY = -500;
+const traffic = []; // Initialize an empty traffic array
 
 function generateInfiniteTraffic() {
     const spacing = 400; // Distance between clusters
-    const numVehicles = Math.random() < 0.6 ? 1 : 2; // 60% 1 car, 40% 2
+    const numVehicles = Math.floor(Math.random() * 4) + 1; // Randomly spawn 1 to 4 vehicles
 
     // Select unique lanes (no overlap)
-    const availableLanes = [0, 1, 2, 3];
+    const availableLanes = Array.from({ length: 25 }, (_, i) => i); // 10 lanes
     shuffle(availableLanes);
     const selectedLanes = availableLanes.slice(0, numVehicles);
 
@@ -30,83 +31,75 @@ function generateInfiniteTraffic() {
     });
 
     trafficSpawnY -= spacing;
-};
+}
 
-const traffic = [
-    // Lead vehicle
-    newCar(1, -100),
-
-    // Cluster 1
-    newCar(0, -200),
-    newTruck(1, -280),
-    newCar(2, -500),
-    newCar(3, -580),
-
-    // Cluster 2
-    newCar(1, -700),
-    newTruck(2, -780),
-    newCar(3, -1000),
-
-    // Cluster 3
-    newTruck(0, -1200),
-    newCar(1, -1400),
-    newCar(2, -1480),
-    newTruck(3, -1560),
-
-    // Final stretch
-    newCar(0, -1800),
-    newTruck(1, -1880),
-    newCar(2, -2100),
-    newCar(3, -2180)
-];
-
-
+// Generate initial traffic
+for (let i = 0; i < 25; i++) {
+    generateInfiniteTraffic();
+}
 
 animate();
 
-function newCar( lane, y ) {
-    return new Car ( road.getLaneCenter(lane), y, 30, 50, "DUMMY", 2);
-};
+function newCar(lane, y) {
+    return new Car(road.getLaneCenter(lane), y, 30, 50, "DUMMY", 2);
+}
 
-function newTruck ( lane, y ) {
-    return new Car ( road.getLaneCenter(lane), y, 40, 150, "DUMMY", 1.5)
-};
+function newTruck(lane, y) {
+    return new Car(road.getLaneCenter(lane), y, 40, 150, "DUMMY", 1.5);
+}
 
 function animate() {
-    for (let i = 0; i < traffic.length; i++) {
-        traffic[i].update(road.borders, []);
-    };
-    car.update(road.borders, traffic);
-
-    // Clean up old traffic far behind car
-    while (traffic.length > 0 && traffic[0].y > car.y + 1000) {
-        traffic.shift(); // remove oldest car
-    };
-
-    if (car.y < trafficSpawnY + 1250) {
-        generateInfiniteTraffic();
-    };
-
-    canvas.height = window.innerHeight;
-
     if (!car.damaged) {
-        ctx.fillStyle = "black"; // Set background to black
-        ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the canvas with black
-    }
+        for (let i = 0; i < traffic.length; i++) {
+            traffic[i].update(road.borders, []);
+        }
+        car.update(road.borders, traffic);
 
-    ctx.save();
-    ctx.translate(0, -car.y + canvas.height * 0.7);
+        // Clean up old traffic far behind car
+        while (traffic.length > 0 && traffic[0].y > car.y + 1000) {
+            traffic.shift(); // Remove oldest car
+        }
 
-    if (car.damaged) {
-        // Draw road and traffic when the car is damaged
+        if (car.y < trafficSpawnY + 1250) {
+            generateInfiniteTraffic();
+        }
+
+        canvas.height = window.innerHeight;
+
+        ctx.save();
+        ctx.translate(0, -car.y + canvas.height * 0.7);
+
+        // Always draw road and traffic
         road.draw(ctx);
         for (let i = 0; i < traffic.length; i++) {
             traffic[i].draw(ctx, 'red');
-        };
+        }
+
+        car.draw(ctx, 'blue');
+
+        ctx.restore();
+        requestAnimationFrame(animate);
+    } else {
+        // Display death screen
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
+        ctx.font = "15px Arial";
+        ctx.fillText("Your car went", canvas.width / 2, canvas.height / 2 - 70);
+        ctx.fillStyle = "red";
+        ctx.font = "30px Arial";
+        ctx.fillText("KAPUT", canvas.width / 2, canvas.height / 2 - 20);
+        ctx.fillStyle = "white";
+        ctx.font = "15px Arial";
+        ctx.fillText("Reload the page to restart", canvas.width / 2, canvas.height / 2 + 20);
+
+        // Add event listener for restart
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "r" || event.key === "R") {
+                location.reload(); // Reload the page to restart
+            }
+        }, { once: true });
     }
-
-    car.draw(ctx, 'white');
-
-    ctx.restore();
-    requestAnimationFrame(animate);
-};
+}

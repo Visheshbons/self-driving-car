@@ -111,11 +111,17 @@ function redirect(url) {
 }
 
 function tryOut(type) {
-    if (type == "main") {
-        redirect('tryOut/index.html');
-    } else {
-        redirect('LIDAR/index.html');
-    }
+    switch(type) {
+        case "tryOut":
+            redirect("LIDAR/index.html");
+            return;
+        case "LIDAR":
+            redirect("tryOut/index.html");
+            return;
+        case "Game":
+            redirect("Game/index.html");
+            return;
+    };
 };
 
 function generateCars(N) {

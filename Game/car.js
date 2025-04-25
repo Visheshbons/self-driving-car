@@ -1,20 +1,17 @@
 class Car {
-    constructor ( x, y, width, height, controlType, maxSpeed = 3.5 ) {
+    constructor ( x, y, width, height, controlType, maxSpeed = Infinity ) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
 
         this.speed = 0;
-        this.acceleration = 0.2;
+        this.acceleration = 0.1;
         this.maxSpeed = maxSpeed;
         this.friction = 0.05;
         this.angle = 0;
         this.damaged = false;
 
-        if (controlType != "DUMMY") {
-            this.sensor = new Sensor(this);
-        };
         this.controls = new Controls(controlType);
     };
 
@@ -73,7 +70,7 @@ class Car {
             this.speed += this.acceleration;
         };
         if (this.controls.reverse) {
-            this.speed -= this.acceleration;
+            this.speed -= this.acceleration * 3;
         };
 
         if (this.speed > this.maxSpeed) {

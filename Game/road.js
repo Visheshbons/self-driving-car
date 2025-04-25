@@ -1,24 +1,24 @@
 class Road {
-    constructor ( x, width, laneCount = 4 ) {
+    constructor ( x, width, laneCount = 25 ) { // Changed default laneCount to 10
         this.x = x;
         this.width = width;
         this.laneCount = laneCount;
 
-        this.left = x - width/2;
-        this.right = x + width/2;
+        this.left = x - width / 2;
+        this.right = x + width / 2;
 
         const infinity = 1000000;
         this.top = -infinity;
         this.bottom = infinity;
 
-        const topLeft = {x: this.left, y: this.top}
-        const topRight = {x: this.right, y: this.top}
-        const bottomLeft = {x: this.left, y: this.bottom}
-        const bottomRight = {x: this.right, y: this.bottom}
+        const topLeft = { x: this.left, y: this.top };
+        const topRight = { x: this.right, y: this.top };
+        const bottomLeft = { x: this.left, y: this.bottom };
+        const bottomRight = { x: this.right, y: this.bottom };
         this.borders = [
             [topLeft, bottomLeft],
             [topRight, bottomRight],
-        ]
+        ];
     };
 
     getLaneCenter(laneIndex) {
@@ -34,13 +34,13 @@ class Road {
             const x = lerp(
                 this.left,
                 this.right,
-                i/this.laneCount
+                i / this.laneCount
             );
 
-            ctx.setLineDash([20,20])
+            ctx.setLineDash([20, 20]);
             ctx.beginPath();
             ctx.moveTo(x, this.top);
-            ctx.lineTo(x,this.bottom);
+            ctx.lineTo(x, this.bottom);
             ctx.stroke();
         };
 

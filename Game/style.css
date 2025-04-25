@@ -3,7 +3,7 @@ body {
     background: darkgray;
     overflow: hidden;
     text-align: center;
-    background-color: black;
+    background-color: darkgray;
 }
 
 #myCanvas {
