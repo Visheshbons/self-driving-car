@@ -68,7 +68,8 @@ class Controls {
         };
     }
 
-    addTouchListeners() {
+    addTouchListeners() {  
+        alert("EXPERIMENTAL FEATURES");
         const touchZone = document.getElementById('touch-controls');
         if (!touchZone) return;
 

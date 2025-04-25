@@ -119,7 +119,7 @@ function tryOut(type) {
             redirect("tryOut/index.html");
             return;
         case "Game":
-            redirect("Game/index.html");
+            redirect("GameKeys/index.html");
             return;
     };
 };
