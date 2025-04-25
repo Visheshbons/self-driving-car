@@ -74,9 +74,9 @@ class Car {
         };
 
         if (this.speed > this.maxSpeed) {
-            this.speed = this.maxSpeed
+            this.speed = this.maxSpeed;
         } else if (this.speed < -(this.maxSpeed / 2)) {
-            this.speed = -(this.maxSpeed / 2)
+            this.speed = -(this.maxSpeed / 2);
         };
 
         if (this.speed > 0) {
@@ -88,16 +88,16 @@ class Car {
         };
 
         if (this.speed != 0) {
-            const flip = this.speed > 0?1: -1;
+            const flip = this.speed > 0 ? 1 : -1;
             if (this.controls.left) {
-                this.angle += 0.03*flip;
+                this.angle += 0.05 * flip; // Increased steering sensitivity
             } else if (this.controls.right) {
-                this.angle -= 0.03*flip;
+                this.angle -= 0.05 * flip; // Increased steering sensitivity
             };
         };
 
-        this.x -= Math.sin(this.angle) * this.speed
-        this.y -= Math.cos(this.angle) * this.speed
+        this.x -= Math.sin(this.angle) * this.speed;
+        this.y -= Math.cos(this.angle) * this.speed;
     };
 
     draw(ctx, color) {
