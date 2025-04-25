@@ -68,5 +68,50 @@ class Controls {
                     break;
             };
         };
+
+        const touchZone = document.getElementById('touch-controls'); // Ensure a touch control element exists
+        if (!touchZone) return;
+
+        touchZone.addEventListener('touchstart', (event) => {
+            const touch = event.target.dataset.control;
+            switch (touch) {
+                case 'forward':
+                    this.forward = true;
+                    break;
+                case 'left':
+                    this.left = true;
+                    break;
+                case 'right':
+                    this.right = true;
+                    break;
+                case 'reverse':
+                    this.reverse = true;
+                    break;
+                case 'nitrous':
+                    this.nitrous = true;
+                    break;
+            };
+        });
+
+        touchZone.addEventListener('touchend', (event) => {
+            const touch = event.target.dataset.control;
+            switch (touch) {
+                case 'forward':
+                    this.forward = false;
+                    break;
+                case 'left':
+                    this.left = false;
+                    break;
+                case 'right':
+                    this.right = false;
+                    break;
+                case 'reverse':
+                    this.reverse = false;
+                    break;
+                case 'nitrous':
+                    this.nitrous = true;
+                    break;
+            };
+        });
     };
 };
