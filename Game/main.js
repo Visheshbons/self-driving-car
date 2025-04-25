@@ -94,6 +94,9 @@ function animate() {
         ctx.fillStyle = "white";
         ctx.font = "15px Arial";
         ctx.fillText("Reload the page to restart", canvas.width / 2, canvas.height / 2 + 20);
+        ctx.fillStyle = "white";
+        ctx.font = "15px Arial";
+        ctx.fillText("Score: " + -car.y + "", canvas.width / 2, canvas.height / 2 + 60);
 
         // Add event listener for restart
         document.addEventListener("keydown", (event) => {
