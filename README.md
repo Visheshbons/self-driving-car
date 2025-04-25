@@ -15,7 +15,7 @@ Keep doing this until you get an AI that can do reasonably well.
 
 ## Game modes
 
-There are two game modes so far: **Challenge** and **LIDAR**. 
+There are three game modes so far: **Challenge**, **LIDAR** and **25 Lanes**. 
 
 ### Challenge mode
 
@@ -31,6 +31,14 @@ I made this purely for fun and to see what would happen.
 This mode demonstrates how LIDAR cannot see through objects, hence they cast long shadows.  
 You still drive using the arrow keys on your keyboard for this one as well.  
 Again, death causes you to be able to see where you crashed.
+
+### 25 Lanes
+
+In the 25 Lanes mode, you drive with an overpowered car with ridiculously high steering sensitivity.
+Unlike the other game modes, this version lets you see the road in actual vision.
+It also has the greatest death screen of all time.
+Here, you can also break using your spacebar, which is 3 times more powerful than your acceleration.
+It is great! (`Car.maxSpeed = infinity`)
 
 ## Some good starter `bestBrain`s
 One is:  
@@ -61,4 +69,4 @@ Then reload.
 
 ---
 
-Version 2.1.1 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 2.2.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
