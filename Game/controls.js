@@ -108,6 +108,9 @@ class Controls {
                             this.nitrous = true;
                             break;
                         };
+                    case 'rocketBoost':
+                        this.rocketBoost = state;
+                        break;
                 }
             }
         };

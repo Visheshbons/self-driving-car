@@ -75,6 +75,9 @@ class Car {
     #move() {
         if (this.controls.nitrous) {
             this.speed += this.acceleration * 10;
+        };
+        if (this.controls.rocketBoost) {
+            this.speed += this.acceleration * 25;
         }
         if (this.controls.forward) {
             this.speed += this.acceleration;
