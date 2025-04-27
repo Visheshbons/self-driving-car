@@ -9,7 +9,6 @@ class Controls {
 
         switch (type) {
             case "KEYS":
-                this.addKeyboardListeners();
                 this.addTouchListeners();
                 break;
             case "DUMMY":
@@ -84,7 +83,7 @@ class Controls {
                 // Optional: vibrate on press
                 if (state && 'vibrate' in navigator) {
                     if (control === 'nitrous') {
-                        navigator.vibrate(1000); // strong effect
+                        navigator.vibrate(100); // strong effect
                     };
                 };
 
@@ -102,8 +101,13 @@ class Controls {
                         this.reverse = state;
                         break;
                     case 'nitrous':
-                        this.nitrous = state;
-                        break;
+                        if (this.nitrous) {
+                            this.nitrous = false;
+                            break;
+                        } else {
+                            this.nitrous = true;
+                            break;
+                        };
                 }
             }
         };

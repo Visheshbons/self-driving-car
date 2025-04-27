@@ -9,6 +9,7 @@ const car = new Car(road.getLaneCenter(12), 100, 30, 50, "KEYS");
 let score = 0; // Declare highScore globally
 let highScore = 0;
 let topSpeed = 0;
+let shownSpeed = '0';
 
 if (localStorage.getItem('highScore')) {
     highScore = parseFloat(localStorage.getItem('highScore')); // Retrieve and parse highScore
@@ -91,12 +92,18 @@ function animate() {
         car.draw(ctx, 'blue');
 
         ctx.restore();
+        
+        if (car.speed < 0) {
+            shownSpeed = Math.floor(-car.speed * 10) + "kph (R)"
+        } else {
+            shownSpeed = Math.floor(car.speed * 10) + "kph"
+        }
 
         // Draw speed text at the top (after restoring transformations)
         ctx.textAlign = "center";
         ctx.fillStyle = "black"; // Set text color to black
         ctx.font = "30px Monospace";
-        ctx.fillText("Speed: " + Math.floor(car.speed * 10) + "kph", canvas.width / 2, 100); // Fixed position at the top
+        ctx.fillText("Speed: " + shownSpeed, canvas.width / 2, 100); // Fixed position at the top
 
         score = -car.y;
         requestAnimationFrame(animate);

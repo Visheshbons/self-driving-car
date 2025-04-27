@@ -73,14 +73,11 @@ class Car {
     };
 
     #move() {
+        if (this.controls.nitrous) {
+            this.speed += this.acceleration * 10;
+        }
         if (this.controls.forward) {
-            if (this.controls.nitrous) {
-                this.speed += this.acceleration * 10;
-            } else if (this.controls.rocketBoost) { // Use controls to activate rocketBoost
-                this.speed += this.acceleration * 50;
-            } else {
-                this.speed += this.acceleration;
-            }
+            this.speed += this.acceleration;
         };
         if (this.controls.reverse) {
             this.speed -= this.acceleration * 3;
