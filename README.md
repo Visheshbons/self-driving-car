@@ -71,9 +71,13 @@ Then reload.
 
 - **Project Developer:** [Vishesh Kudva](https://github.com/Visheshbons)
 - **Original Concept & Tutorials:** [Dr. Radu Mariescu-Istodor](https://github.com/gniziemazity/Self-driving-car)
-- **AI & Code Assistance:** [ChatGPT by OpenAI](https://openai.com/chatgpt)
+- **AI & Code Assistance:** [ChatGPT by OpenAI](https://openai.com/chatgpt) and [Github Copilot](https://github.com/features/copilot)
 - **Source Code:** [GitHub Repository](https://github.com/Visheshbons/self-driving-car)
 - **Live Demo:** [v-autopilot-ai-trainer.onrender.com](https://v-autopilot-ai-trainer.onrender.com)
+
+## Features coming up
+
+The next stage is planned to be a full city-style workd, with traffic lights, stop signs, and lane regulations
 
 ---
 
