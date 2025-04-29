@@ -12,7 +12,7 @@ class Car {
             this.acceleration = 0.1;
         }
         this.maxSpeed = maxSpeed;
-        this.friction = 0.05;
+        this.friction = 0;
         this.angle = 0;
         this.damaged = false;
         this.rocketBoost = false; // Initialize rocketBoost
