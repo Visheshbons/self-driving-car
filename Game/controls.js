@@ -90,6 +90,7 @@ class Controls {
                 switch (control) {
                     case 'forward':
                         this.forward = state;
+                        this.reverse = false;
                         break;
                     case 'left':
                         this.left = state;
