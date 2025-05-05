@@ -1,5 +1,5 @@
 class Car {
-    constructor ( x, y, width, height, controlType, maxSpeed = 100 ) {
+    constructor ( x, y, width, height, controlType, maxSpeed = 35 ) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -103,9 +103,9 @@ class Car {
         if (this.speed != 0) {
             const flip = this.speed > 0 ? 1 : -1;
             if (this.controls.left) {
-                this.angle += 0.05 * flip; // Increased steering sensitivity
+                this.angle += 0.03 * flip; // Increased steering sensitivity
             } else if (this.controls.right) {
-                this.angle -= 0.05 * flip; // Increased steering sensitivity
+                this.angle -= 0.03 * flip; // Increased steering sensitivity
             };
         };
 
@@ -115,6 +115,9 @@ class Car {
 
     draw(ctx, color) {
         if (!this.polygon) return;
+        if (this.x < Road.left || this.x > Road.right) {
+            this.damaged = true;
+        };
     
         ctx.fillStyle = this.damaged ? 'gray' : color;
         

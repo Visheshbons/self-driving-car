@@ -36,7 +36,7 @@ function generateInfiniteTraffic() {
             traffic.push(newTruck(lane, trafficSpawnY, laneSpeed)); // Pass speed to newTruck
             truckPlaced = true;
         } else {
-            traffic.push(newCar(lane, trafficSpawnY, laneSpeed)); // Pass speed to newCar
+            traffic.push(newCar(lane, trafficSpawnY, laneSpeed + 1.5)); // Pass speed to newCar
         }
     });
 

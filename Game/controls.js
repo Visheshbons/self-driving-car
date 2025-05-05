@@ -91,12 +91,18 @@ class Controls {
                     case 'forward':
                         this.forward = state;
                         this.reverse = false;
+                        this.left = false;
+                        this.right = false;
                         break;
                     case 'left':
                         this.left = state;
+                        this.right = false;
+                        this.forward = false;
                         break;
                     case 'right':
                         this.right = state;
+                        this.left = false;
+                        this.forward = false;
                         break;
                     case 'reverse':
                         this.reverse = state;
