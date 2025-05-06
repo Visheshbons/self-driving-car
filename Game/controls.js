@@ -89,33 +89,57 @@ class Controls {
 
                 switch (control) {
                     case 'forward':
-                        this.forward = state;
-                        this.reverse = false;
+                        this.forward = false;
                         this.left = false;
                         this.right = false;
+                        this.reverse = false;
+                        this.nitrous = false;
+                        this.rocketBoost = false;
+                        this.forward = state;
                         break;
                     case 'left':
-                        this.left = state;
-                        this.right = false;
                         this.forward = false;
+                        this.left = false;
+                        this.right = false;
+                        this.reverse = false;
+                        this.nitrous = false;
+                        this.rocketBoost = false;
+                        this.left = state;
                         break;
                     case 'right':
-                        this.right = state;
-                        this.left = false;
                         this.forward = false;
+                        this.left = false;
+                        this.right = false;
+                        this.reverse = false;
+                        this.nitrous = false;
+                        this.rocketBoost = false;
+                        this.right = state;
                         break;
                     case 'reverse':
+                        this.forward = false;
+                        this.left = false;
+                        this.right = false;
+                        this.reverse = false;
+                        this.nitrous = false;
+                        this.rocketBoost = false;
                         this.reverse = state;
                         break;
                     case 'nitrous':
-                        if (this.nitrous) {
-                            this.nitrous = false;
-                            break;
-                        } else {
-                            this.nitrous = true;
-                            break;
-                        };
+                        this.forward = false;
+                        this.left = false;
+                        this.right = false;
+                        this.reverse = false;
+                        this.nitrous = false;
+                        this.rocketBoost = false;
+                        this.nitrous = state;
+                        break;
                     case 'rocketBoost':
+                        this.forward = false;        
+                        this.left = false;       
+                        this.right = false;     
+                        this.reverse = false;   
+                        this.nitrous = false;        
+                        this.rocketBoost = false;
                         this.rocketBoost = state;
                         break;
                 }
