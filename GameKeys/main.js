@@ -104,7 +104,7 @@ function animate() {
         ctx.fillStyle = "black"; // Set text color to black
         ctx.font = "30px Monospace";
         ctx.fillText("Speed: " + shownSpeed + "kph", canvas.width / 2, 100); // Fixed position at the top
-        if (controls.nitrous) {
+        if (car.controls.nitrous) {
             ctx.fillText("NITROUS ENABLED", canvas.width / 2, 300);
         };
 
