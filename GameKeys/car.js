@@ -16,7 +16,10 @@ class Car {
         this.friction = 0.05;
         this.angle = 0;
 
+
         this.damaged = false;
+        this.BROKEN = false; // Used for custom lightspeed death message
+
         this.BROKEN = false; // Used for custom lightspeed death message
 
         this.rocketBoost = false; // Initialize rocketBoost
