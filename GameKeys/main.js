@@ -23,9 +23,21 @@ function generateInfiniteTraffic() {
     const numVehicles = Math.floor(Math.random() * 4) + 1; // Randomly spawn 1 to 4 vehicles
 
     // Select unique lanes (no overlap)
-    const availableLanes = Array.from({ length: 25 }, (_, i) => i); // 10 lanes
+    const availableLanes = Array.from({ length: 25 }, (_, i) => i); // 25 lanes
     shuffle(availableLanes);
-    const selectedLanes = availableLanes.slice(0, numVehicles);
+
+    // Bias towards left lanes
+    const leftBias = availableLanes.filter(lane => lane < 12); // Lanes on the left
+    const rightBias = availableLanes.filter(lane => lane >= 12); // Lanes on the right
+
+    const selectedLanes = [];
+    for (let i = 0; i < numVehicles; i++) {
+        if (Math.random() < 0.7 && leftBias.length > 0) { // 70% chance to pick from left lanes
+            selectedLanes.push(leftBias.shift());
+        } else if (rightBias.length > 0) {
+            selectedLanes.push(rightBias.shift());
+        }
+    }
 
     let truckPlaced = false;
 

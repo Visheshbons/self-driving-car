@@ -7,7 +7,7 @@ class Car {
 
         this.speed = 0;
         if (controlType === "DUMMY") {
-            this.acceleration = 0.5;
+            this.acceleration = Math.pow(10, 100); // Too far? Still runs.
         } else {
             this.acceleration = 0.1;
             this.nitrousMaxSpeed = maxSpeed * 1.5;
