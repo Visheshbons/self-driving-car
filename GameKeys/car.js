@@ -15,7 +15,10 @@ class Car {
         this.maxSpeed = maxSpeed;
         this.friction = 0.05;
         this.angle = 0;
+
         this.damaged = false;
+        this.BROKEN = false; // Used for custom lightspeed death message
+
         this.rocketBoost = false; // Initialize rocketBoost
 
         this.controls = new Controls(controlType);
@@ -78,7 +81,7 @@ class Car {
             if (this.controls.nitrous) {
                 this.speed += this.acceleration * 5;
             } else if (this.controls.rocketBoost) {
-                this.speed += this.acceleration * 50;
+                this.speed *= 1.05
             } else {
                 if (this.speed < this.maxSpeed) {
                     this.speed += this.acceleration;
@@ -126,6 +129,10 @@ class Car {
 
         this.x -= Math.sin(this.angle) * this.speed;
         this.y -= Math.cos(this.angle) * this.speed;
+
+        if (this.speed * 10 /** Speed to kph */ > 1079252848.7999 /** Scientific speed of light */) {
+            this.BROKEN = true; // For lightspeed death message
+        };
     };
 
     draw(ctx, color) {
