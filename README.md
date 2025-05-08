@@ -81,4 +81,4 @@ The next stage is planned to be a full city-style workd, with traffic lights, st
 
 ---
 
-Version 2.3.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 2.3.1 | &copy; 2025 Vishesh Kudva. | All rights reserved.

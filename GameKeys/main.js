@@ -71,7 +71,7 @@ function newTruck(lane, y, speed) {
 }
 
 function animate() {
-    if (!car.damaged) {
+    if (!car.damaged && !car.BROKEN) {
         for (let i = 0; i < traffic.length; i++) {
             traffic[i].update(road.borders, []);
         }
@@ -111,6 +111,14 @@ function animate() {
             shownSpeed = 0; // Reset speed if car is not moving
         }
 
+        
+        if (canvas.classList.contains('lightspeed-warning')) {
+            ctx.fillStyle = "black";
+            ctx.font = "bold 40px Monospace";
+            ctx.textAlign = "center";
+            ctx.fillText("⚠ WARNING: Light Barrier Approaching ⚠", canvas.width / 2, 50);
+        }
+
         // Draw speed text at the top (after restoring transformations)
         ctx.textAlign = "center";
         ctx.fillStyle = "black"; // Set text color to black
@@ -119,11 +127,11 @@ function animate() {
         if (!car.damaged && car.controls?.nitrous) {
             ctx.fillStyle = "red";
             ctx.fillText("NITROUS ENABLED", canvas.width / 2, 150);
-        }
+        }      
 
         score = -car.y;
         requestAnimationFrame(animate);
-    } else {
+    } else if (car.damaged && !car.BROKEN) {
         score = -car.y; // Update score with the new value
 
         // Display death screen
@@ -160,5 +168,14 @@ function animate() {
                 location.reload(); // Reload the page to restart
             }
         }, { once: true });
+    } else if (car.BROKEN) {
+        // Display lightspeed death screen
+        ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = "red";
+        ctx.font = "30px Monospace";
+        ctx.fillText("reality.exe has stopped responding", canvas.width / 2, canvas.height / 2 - 20);
     }
 }
