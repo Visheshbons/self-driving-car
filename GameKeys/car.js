@@ -1,5 +1,5 @@
 class Car {
-    constructor ( x, y, width, height, controlType, maxSpeed = 35 ) {
+    constructor ( x, y, width, height, controlType, maxSpeed = 18 ) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -7,9 +7,10 @@ class Car {
 
         this.speed = 0;
         if (controlType === "DUMMY") {
-            this.acceleration = Infinity * 1000;
+            this.acceleration = 0.5;
         } else {
             this.acceleration = 0.1;
+            this.nitrousMaxSpeed = maxSpeed * 1.5;
         }
         this.maxSpeed = maxSpeed;
         this.friction = 0.05;
@@ -75,39 +76,53 @@ class Car {
     #move() {
         if (this.controls.forward) {
             if (this.controls.nitrous) {
-                this.speed += this.acceleration * 10;
-            } else if (this.controls.rocketBoost) { // Use controls to activate rocketBoost
+                this.speed += this.acceleration * 5;
+            } else if (this.controls.rocketBoost) {
                 this.speed += this.acceleration * 50;
             } else {
-                this.speed += this.acceleration;
+                if (this.speed < this.maxSpeed) {
+                    this.speed += this.acceleration;
+                    if (this.speed > this.maxSpeed) this.speed = this.maxSpeed;
+                }
             }
-        };
+        }        
         if (this.controls.reverse) {
             this.speed -= this.acceleration * 3;
-        };
-
-        if (this.speed > this.maxSpeed) {
-            this.speed = this.maxSpeed;
-        } else if (this.speed < -(this.maxSpeed / 2)) {
-            this.speed = -(this.maxSpeed / 2);
         };
 
         if (this.speed > 0) {
             this.speed -= this.friction;
         } else if (this.speed < 0) {
-            this.speed += this.friction;
+            this.speed = 0;
         } else if (Math.abs(this.speed) < this.friction) {
             this.speed = 0;
         };
 
         if (this.speed != 0) {
-            const flip = this.speed > 0 ? 1 : -1;
             if (this.controls.left) {
-                this.angle += 0.05 * flip; // Increased steering sensitivity
+                this.angle += 0.05;
             } else if (this.controls.right) {
-                this.angle -= 0.05 * flip; // Increased steering sensitivity
+                this.angle -= 0.05;
             };
         };
+
+        // Clamp speed for DUMMY cars
+        if (this.controlType === "DUMMY") {
+            if (this.speed > this.maxSpeed) {
+                this.speed = this.maxSpeed;
+            } else if (this.speed < -(this.maxSpeed / 2)) {
+                this.speed = -(this.maxSpeed / 2);
+            }
+        }
+        // Clamp speed for normal cars only when nitrous is on
+        else if (this.controls.nitrous) {
+            if (this.speed > this.nitrousMaxSpeed) {
+                this.speed = this.nitrousMaxSpeed;
+            } else if (this.speed < -(this.nitrousMaxSpeed / 2)) {
+                this.speed = -(this.nitrousMaxSpeed / 2);
+            }
+        }
+        // No clamping otherwise — let friction do the work
 
         this.x -= Math.sin(this.angle) * this.speed;
         this.y -= Math.cos(this.angle) * this.speed;

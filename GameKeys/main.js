@@ -93,10 +93,10 @@ function animate() {
 
         ctx.restore();
 
-        if (car.speed < 0) {
-            shownSpeed = -Math.floor(car.speed * 10) + "(R)";
+        if (car.speed > 0) {
+            shownSpeed = Math.floor(car.speed * 10) + 1; // Convert speed to kph
         } else {
-            shownSpeed = Math.floor(car.speed * 10)
+            shownSpeed = 0; // Reset speed if car is not moving
         }
 
         // Draw speed text at the top (after restoring transformations)
@@ -105,7 +105,8 @@ function animate() {
         ctx.font = "30px Monospace";
         ctx.fillText("Speed: " + shownSpeed + "kph", canvas.width / 2, 100); // Fixed position at the top
         if (!car.damaged && car.controls?.nitrous) {
-            ctx.fillText("NITROUS ENABLED", canvas.width / 2, 300);
+            ctx.fillStyle = "red";
+            ctx.fillText("NITROUS ENABLED", canvas.width / 2, 150);
         }
 
         score = -car.y;
@@ -139,7 +140,7 @@ function animate() {
             ctx.fillText("High Score: " + highScore, canvas.width / 2, canvas.height / 2 + 60);
         };
         ctx.fillStyle = "white";
-        ctx.fillText("Top Speed: " + Math.floor(topSpeed * 1000) / 100 + "kph", canvas.width / 2, canvas.height / 2 + 100);
+        ctx.fillText("Top Speed: " + (Math.floor(topSpeed * 1000) / 100 + 1) + "kph", canvas.width / 2, canvas.height / 2 + 100);
 
         // Add event listener for restart
         document.addEventListener("keydown", (event) => {
