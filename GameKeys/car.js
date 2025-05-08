@@ -1,5 +1,5 @@
 class Car {
-    constructor ( x, y, width, height, controlType, maxSpeed = 100 ) {
+    constructor ( x, y, width, height, controlType, maxSpeed = 35 ) {
         this.x = x;
         this.y = y;
         this.width = width;
