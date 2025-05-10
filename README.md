@@ -91,4 +91,4 @@ So far: City and lanes built, traffic lights, stop signs and lane detection comi
 
 ---
 
-Version 2.4.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 3.0.0-alpha | &copy; 2025 Vishesh Kudva. | All rights reserved.
