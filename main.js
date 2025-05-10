@@ -121,6 +121,9 @@ function tryOut(type) {
         case "Game":
             redirect("GameKeys/index.html");
             return;
+        case "City":
+            redirect("Test/index.html");
+            return;
     };
 };
 

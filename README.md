@@ -15,7 +15,7 @@ Keep doing this until you get an AI that can do reasonably well.
 
 ## Game modes
 
-There are three game modes so far: **Challenge**, **LIDAR** and **25 Lanes**. 
+There are four game modes so far: **Challenge**, **LIDAR**, **25 Lanes**, and **City**. 
 
 ### Challenge mode
 
@@ -34,6 +34,8 @@ Again, death causes you to be able to see where you crashed.
 
 ### 25 Lanes
 
+#### Base Version (Stable)
+
 In the 25 Lanes mode, you drive with an overpowered car with ridiculously high steering sensitivity. 
 Unlike the other game modes, this version lets you see the road in actual vision. 
 It also has the greatest death screen of all time. 
@@ -42,11 +44,18 @@ Press N for nitrous, and R for the Rocket booster.
 It also shows you your Y value as a score, and also shows you the highest speed you travelled at. 
 It is great! (`Car.maxSpeed = infinity`)
 
-### 25 Lanes Touchscreen (Unstable)
+#### Touchscreen (Unstable)
 
 This is a feeble attempt to make the game accecable by mobile users. \
 Can only ba accessed via `"/Game/index.html"`. \
 Linked: [here](https://v-autopilot-ai-trainer.onrender.com/Game/index.html).
+
+### City
+
+This is a newly added game mode, which accually has AI implemented in it. \
+This also happens to be the only gamemode with drifting in it. \
+To use the AI, just fork this repo, go to `Test/main.js`, and change the constant `N` to any number other than 1 to spawn AI. \
+Be careful though!
 
 ## Some good starter `bestBrain`s
 One is:  
@@ -77,8 +86,9 @@ Then reload.
 
 ## Features coming up
 
-The next stage is planned to be a full city-style workd, with traffic lights, stop signs, and lane regulations
+The next stage is planned to be a full city-style workd, with traffic lights, stop signs, and lane regulations.
+So far: City and lanes built, traffic lights, stop signs and lane detection coming up.
 
 ---
 
-Version 2.3.1 | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 2.4.0 | &copy; 2025 Vishesh Kudva. | All rights reserved.
