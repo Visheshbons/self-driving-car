@@ -1,5 +1,5 @@
 class Car{
-    constructor(x,y,width,height,controlType,angle=0,maxSpeed=3,color="blue",acceleration=0.2,steerSense=0.,drift=false){
+    constructor(x,y,width,height,controlType,angle=0,{maxSpeed=30,color="blue",acceleration=0.2,steerSense=0.03,drift=false}={}){
         this.x=x;
         this.y=y;
         this.width=width;
@@ -7,7 +7,7 @@ class Car{
 
         this.speed=0;
         this.acceleration=acceleration;
-        this.maxSpeed=maxSpeed;
+        this.maxSpeed=maxSpeed / 10;
         this.friction=0.05;
         this.angle=angle;
         this.damaged=false;
@@ -21,7 +21,7 @@ class Car{
         if(controlType!="DUMMY"){
             this.sensor=new Sensor(this);
             this.brain=new NeuralNetwork(
-                [this.sensor.rayCount,6,4]
+                [this.sensor.rayCount + 1,6,6,4]
             );
         }
         this.controls=new Controls(controlType);
@@ -53,10 +53,11 @@ class Car{
         }
         if(this.sensor){
             this.sensor.update(roadBorders,traffic);
-            const offsets=this.sensor.readings.map(
+            let inputs=this.sensor.readings.map(
                 s=>s==null?0:1-s.offset
             );
-            const outputs=NeuralNetwork.feedForward(offsets,this.brain);
+            inputs.push((this.speed/this.maxSpeed));
+            const outputs=NeuralNetwork.feedForward(inputs,this.brain);
 
             if(this.useBrain){
                 this.controls.forward=outputs[0];
