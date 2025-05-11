@@ -155,3 +155,15 @@ function animate(time){
     Visualizer.drawNetwork(networkCtx,bestCar.brain);
     requestAnimationFrame(animate);
 }
+
+fetch('/Test/world/saves/big.world')
+  .then(res => {
+    if (!res.ok) throw new Error(res.statusText);
+    return res.arrayBuffer();
+  })
+  .then(buffer => {
+    // Handle the binary data buffer here
+    console.log('World data loaded successfully:', buffer);
+    // You can parse or process the buffer as needed
+  })
+  .catch(console.error);
