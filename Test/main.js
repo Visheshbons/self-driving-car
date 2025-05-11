@@ -85,28 +85,32 @@ function generateCars(N){
 }
 
 function drive () {
-    const startPoints = world.markings.filter((m) => m instanceof Start);
-    const startPoint = startPoints.length > 0
-        ? startPoints[0].center
-        : new Point(100, 100);
-    const dir = startPoints.length > 0
-        ? startPoints[0].directionVector
-        : new Point(0, -1);
-    const startAngle = -angle(dir) + Math.PI / 2;
-
-    const newKeysCar = new Car(startPoint.x, startPoint.y, 30, 50, "KEYS", startAngle, {
-        maxSpeed: 180,
-        color: "lightgreen",
-        acceleration: 0.2,
-        steerSense: 0.075,
-        drift: true
-    });
-    cars.push(newKeysCar);
-    keysCar = newKeysCar;
-    keysCarExists = true;
-    // Immediately update the viewport offset when drive() is called
-    viewport.offset.x = -keysCar.x;
-    viewport.offset.y = -keysCar.y;
+    if (!keysCarExists) {
+        const startPoints = world.markings.filter((m) => m instanceof Start);
+        const startPoint = startPoints.length > 0
+            ? startPoints[0].center
+            : new Point(100, 100);
+        const dir = startPoints.length > 0
+            ? startPoints[0].directionVector
+            : new Point(0, -1);
+        const startAngle = -angle(dir) + Math.PI / 2;
+    
+        const newKeysCar = new Car(startPoint.x, startPoint.y, 30, 50, "KEYS", startAngle, {
+            maxSpeed: 180,
+            color: "lightgreen",
+            acceleration: 0.2,
+            steerSense: 0.075,
+            drift: true
+        });
+        cars.push(newKeysCar);
+        keysCar = newKeysCar;
+        keysCarExists = true;
+        // Immediately update the viewport offset when drive() is called
+        viewport.offset.x = -keysCar.x;
+        viewport.offset.y = -keysCar.y;
+    } else {
+        alert("You are already driving a car!");
+    }
 };
 
 function animate(time){

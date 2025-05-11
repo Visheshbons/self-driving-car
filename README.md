@@ -52,10 +52,10 @@ Linked: [here](https://v-autopilot-ai-trainer.onrender.com/Game/index.html).
 
 ### City
 
-This is a newly added game mode, which accually has AI implemented in it. \
+This is a newly added game mode, which is also an AI trainer. \
+To use as a gamemode, simply press the `I wanna drive!` button, and you will spawn in a green car! \
 This also happens to be the only gamemode with drifting in it. \
-To use the AI, just fork this repo, go to `Test/main.js`, and change the constant `N` to any number other than 1 to spawn AI. \
-Be careful though!
+Be careful though, as your car goes _fast_, and also drifts a _lot_.
 
 ## Some good starter `bestBrain`s
 One is:  
@@ -91,4 +91,4 @@ So far: City and lanes built, traffic lights, stop signs and lane detection comi
 
 ---
 
-Version 3.0.0-alpha | &copy; 2025 Vishesh Kudva. | All rights reserved.
+Version 3.0.0-alpha-1 | &copy; 2025 Vishesh Kudva. | All rights reserved.
