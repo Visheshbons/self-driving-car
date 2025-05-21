@@ -52,6 +52,7 @@ Linked: [here](https://v-autopilot-ai-trainer.onrender.com/Game/index.html).
 
 ### City
 
+**IMPORTANT**: This does not work on the main page, go to [the Github Pages version](https://visheshbons.github.io/self-driving-car/Test/index.html) for a functional version. \
 This is a newly added game mode, which is also an AI trainer. \
 To use as a gamemode, simply press the `I wanna drive!` button, and you will spawn in a green car! \
 This also happens to be the only gamemode with drifting in it. \
