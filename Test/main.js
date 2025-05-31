@@ -28,10 +28,10 @@ let keysCarExists = false;
 
 const cars=generateCars(N);
 let bestCar=cars[0];
-if(localStorage.getItem("bestBrain")){
+if(localStorage.getItem("bestBrainCity")){
     for(let i=0;i<cars.length;i++){
         cars[i].brain=JSON.parse(
-            localStorage.getItem("bestBrain"));
+            localStorage.getItem("bestBrainCity"));
         if(i!=0){
             NeuralNetwork.mutate(cars[i].brain,0.1);
         }
@@ -44,12 +44,12 @@ const roadBorders = world.roadBorders.map((s) => [s.p1, s.p2]);
 animate();
 
 function save(){
-    localStorage.setItem("bestBrain",
+    localStorage.setItem("bestBrainCity",
         JSON.stringify(bestCar.brain));
 }
 
 function discard(){
-    localStorage.removeItem("bestBrain");
+    localStorage.removeItem("bestBrainCity");
 }
 
 function generateCars(N){
