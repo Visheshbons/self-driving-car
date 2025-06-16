@@ -156,7 +156,7 @@ function animate(time){
     requestAnimationFrame(animate);
 }
 
-fetch('/world/saves/big.world')
+fetch('world/saves/big.world')
   .then(res => {
     if (!res.ok) throw new Error(res.statusText);
     return res.arrayBuffer();
